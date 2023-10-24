@@ -43,15 +43,16 @@
     </header>
     <div id="overlay" class="overlay hidden" onclick="closeOverlay()">
         <div class="overlay-content">
-            <h2 style="color: yellow;">Great Choice</h2>
-            <h3 style="color: yellow;" id="ChoiceText"></h3>
-            <p style="color: yellow;" id="amount"></p>
+            <h2 style="color: yellow;">Are you sure ?</h2>
+            <button class="btn btn-danger" style="color: yellow;" id="ChoiceText" onclick="deleteOrder()">Yes</button>
+            <button class="btn btn-danger" style="color: yellow;" id="ChoiceText" onclick="closeOverlay()">No</button>
         </div>
 
     </div>
+    <div class="ordered-items-container" id="orderedItems"></div>
     <div style="display: flex; justify-content:center; margin-top:3%">
-        <button class="btn btn-danger" onclick="clear()">Clear cart</button>
-        <button class="btn btn-danger" style="margin-left: 2%;" onclick="Confirm()">Confirm order</button>
+        <button class="btn btn-danger" onclick="clearCart()">Clear cart</button>
+        <button class="btn btn-danger" style="margin-left: 2%;" onclick="confirm()">Confirm order</button>
     </div>
     <script src="scripts/cart.js"></script>
 </body>
