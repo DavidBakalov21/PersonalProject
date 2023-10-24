@@ -68,7 +68,7 @@
     </div>
     <div class="Card">
         <img src="img/mac/doubleCheese.png" class="imgM"/>
-        <h3 style="color: yellow;">Double Royal Cheese</h3>
+        <h5 style="color: yellow;">Double Royal Cheese</h3>
         <button style="color: yellow;" onclick="addToOrder('Double Royal Cheese')" class="btn btn-danger">Add to order</button>
         </div>
         <div class="Card ML">
@@ -76,6 +76,15 @@
             <h3 style="color: yellow;">Chicken Roll</h3>
             <button style="color: yellow;" onclick="addToOrder('Chicken Roll')" class="btn btn-danger">Add to order</button>
             </div>
+    </div>
+
+    <div id="overlay" class="overlay hidden" onclick="closeOverlay()">
+        <div class="overlay-content">
+            <h2 style="color: yellow;">Great Choice</h2>
+            <h3 style="color: yellow;" id="ChoiceText"></h3>
+            <p style="color: yellow;" id="amount"></p>
+        </div>
+
     </div>
     <div class="RowImages">
         <div class="Card MR">
@@ -90,7 +99,7 @@
             </div>
             <div class="Card ML">
                 <img src="img/mac/nuggets.png" class="imgM"/>
-                <h3 style="color: yellow;">Chicken McNuggets</h3>
+                <h5 style="color: yellow;">Chicken McNuggets</h3>
                 <button style="color: yellow;" onclick="addToOrder('Chicken McNuggets')" class="btn btn-danger">Add to order</button>
                 </div>
         </div>

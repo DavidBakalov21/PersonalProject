@@ -18,3 +18,11 @@ function displayOrderCounts(orders) {
         console.log(`Food: ${key}, Count: ${value}`);
     });
   }
+
+
+  function clear(){
+document.getElementById('overlay').classList.remove('hidden');
+  }
+  function closeOverlay() {
+    document.getElementById('overlay').classList.add('hidden');
+}
