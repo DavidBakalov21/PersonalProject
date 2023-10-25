@@ -68,7 +68,7 @@ width: 40%;
 
 
  
- @media screen and (max-width:340px) {
+ @media screen and (max-width:500px) {
     .RowImages{
         display: flex; 
         flex-direction:column
@@ -83,7 +83,6 @@ width: 40%;
              align-items: center;
              margin-top: 5%;
              background-color: rgb(220, 53, 69);
-             overflow: hidden; 
              border-radius: 10px;
           }
 

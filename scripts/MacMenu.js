@@ -1,9 +1,7 @@
 window.onload = function() {
   const cards = document.querySelectorAll('.Card');
-  cards.forEach((card, index) => {
-      setTimeout(() => {
+  cards.forEach((card) => {
           card.classList.add('animate-card');
-      }, 250 * index);
   });
 }
 let defaultOrderCounts = {

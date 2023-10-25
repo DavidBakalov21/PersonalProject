@@ -115,12 +115,9 @@
     <script>
 
         window.onload = function() {
-         
-            const cards = document.querySelectorAll('.CardAbout');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
+            const cards = document.querySelectorAll('.Card');
+            cards.forEach((card) => {
                     card.classList.add('animate-card');
-                }, 250 * index);
             });
         }
     </script>
