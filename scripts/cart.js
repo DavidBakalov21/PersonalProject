@@ -1,20 +1,97 @@
-
-let orderCounts = {};
-
-// Load the data from localStorage when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-  const savedData = localStorage.getItem('orderCounts');
-  
-  if (savedData) {
-    orderCounts = JSON.parse(savedData);
-    // Optionally: Update the UI based on the retrieved data
-    displayOrderCounts(orderCounts);
+class Cart {
+  constructor() {
+      this.defaultOrderCounts = {
+        "Royal Cheese": { count: 0, price: 6.99 },
+    "Cheeseburger": { count: 0, price: 8.49 },
+    "Hamburger": { count: 0, price: 4.99 },
+    "McChicken": { count: 0, price: 4.49 },
+    "Double Royal Cheese": { count: 0, price: 9.99 },
+    "Chicken Roll": { count: 0, price: 5.79 },
+    "Medium fries": { count: 0, price: 5.19 },
+    "Large fries": { count: 0, price: 6.79 },
+    "Chicken McNuggets": { count: 0, price: 5.99 },
+    "Toast": { count: 0, price: 6.99 },
+    "Twister": { count: 0, price: 8.49 },
+    "Dips": { count: 0, price: 4.99 },
+    "Chefburger": { count: 0, price: 4.49 },
+    "Boxmaster": { count: 0, price: 9.99 },
+    "Bakcet": { count: 0, price: 5.79 },
+    "BBQ pizza": { count: 0, price: 6.99 },
+    "Extravaganzza": { count: 0, price: 8.49 },
+    "Greece pizza": { count: 0, price: 4.99 },
+    "Grill pizza": { count: 0, price: 4.49 },
+    "Karbonara": { count: 0, price: 9.99 },
+    "Marharyta": { count: 0, price: 5.79 }
+      };
+      this.orderCounts = JSON.parse(localStorage.getItem('orderCounts')) || this.defaultOrderCounts;
+      document.addEventListener('DOMContentLoaded', () => this.displayOrderCounts());
   }
-});
+  displayOrderCounts() {
+      let container = document.getElementById("orderedItems");
+      container.innerHTML = "";
 
+      let total = 0;
 
-function displayOrderCounts(orders) {
-    Object.entries(orders).forEach(([key, value]) => {
-        console.log(`Food: ${key}, Count: ${value}`);
-    });
+      Object.entries(this.orderCounts).forEach(([key, item]) => {
+          if (item.count > 0) {
+              const itemElem = document.createElement("div");
+              itemElem.classList.add("ordered-item");
+
+              const priceForAllItems = item.count * item.price;
+              total += priceForAllItems;
+
+              itemElem.textContent = `Food: ${key}, Count: ${item.count}, Total Price: $${priceForAllItems.toFixed(2)}`;
+              itemElem.style="color: yellow;"
+              const deleteBtn = this.createDeleteButton(key);
+              itemElem.appendChild(deleteBtn);
+              container.appendChild(itemElem);
+          }
+      });
+
+      const totalElem = document.createElement("div");
+      totalElem.classList.add("total-amount");
+      totalElem.textContent = `Total: $${total.toFixed(2)}`;
+      container.appendChild(totalElem);
   }
+
+  createDeleteButton(key) {
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.classList.add("btn", "btn-danger", "delete-button");
+      deleteBtn.style.marginLeft = "2%";
+      deleteBtn.addEventListener("click", () => {
+          this.orderCounts[key].count = 0;
+          localStorage.setItem('orderCounts', JSON.stringify(this.orderCounts));
+          this.displayOrderCounts();
+      });
+      return deleteBtn;
+  }
+}
+window.onload = function() {
+         
+  const cards = document.querySelectorAll('.ordered-items-container');
+  cards.forEach((card, index) => {
+      setTimeout(() => {
+          card.classList.add('animate-card');
+      }, 250 * index);
+  });
+}
+const cart = new Cart();
+
+function clearCart() {
+  document.getElementById('overlay').classList.remove('hidden');
+}
+
+function closeOverlay() {
+  document.getElementById('overlay').classList.add('hidden');
+}
+
+function deleteOrder() {
+  localStorage.removeItem('orderCounts');
+  cart.orderCounts = { ...cart.defaultOrderCounts };
+  cart.displayOrderCounts();
+}
+
+function confirm() {
+  document.getElementById('overlay').classList.remove('hidden');
+}

@@ -112,5 +112,18 @@
     
     </body>
     </html>
+    <script>
+
+        window.onload = function() {
+         
+            const cards = document.querySelectorAll('.CardAbout');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate-card');
+                }, 250 * index);
+            });
+        }
+    </script>
+    <script src="router.js"></script>
 </body>
 </html>
