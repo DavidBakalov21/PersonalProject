@@ -59,7 +59,7 @@
         <h1 style="text-align: center; color:yellow" class="HeadText">KFC</h1>
             <p class="ParMC">Originating from Corbin, Kentucky, in 1930, KFC has transformed from a single roadside restaurant to a global fast-food powerhouse. Best known for its signature "finger-lickin' good" fried chicken, KFC brings the rich flavors of the American South to tables worldwide.</p>
     </div>
-    <button class="btn btn-danger" style="color: yellow; margin-bottom:3%">Check menu</button>
+    <button class="btn btn-danger" style="color: yellow; margin-bottom:3%"><a class="LInk" style="color: yellow;" href="KFCMenu.html">Check menu</a></button>
 </div>
 
 <div class="Card">
@@ -68,8 +68,19 @@
         <h1 style="text-align: center; color:yellow" class="HeadText">Domino's Pizza</h1>
             <p class="ParMC">Founded in 1960 in Ypsilanti, Michigan, Domino's Pizza has grown from a single pizzeria to a global leader in pizza delivery. Recognized for its dedication to quick service and innovative tech solutions, Domino's consistently delivers warm, delicious pizzas to millions of hungry customers around the world.</p>
     </div>
-    <button class="btn btn-danger" style="color: yellow; margin-bottom:6%">Check menu</button>
+    <button class="btn btn-danger" style="color: yellow; margin-bottom:6%"><a class="LInk" style="color: yellow;" href="DominosMenu.html">Check menu</a></button>
 </div>
     </main>
 </body>
+<script>
+    window.onload = function() {
+        const cards = document.querySelectorAll('.Card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('animate-card');
+            }, 250 * index); 
+        });
+    }
+</script>
+<script src="router.js"></script>
 </html>
