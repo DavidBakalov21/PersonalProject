@@ -8,12 +8,12 @@
     background-color: rgb(220, 53, 69);
     border-radius: 10px;
     opacity: 0;
-    transform: translateY(50px);
+    transform: scale(0);
     transition: opacity 1s ease, transform 1s ease;
  }
  .animate-card {
    opacity: 1;
-   transform: translateY(0);
+   transform: scale(1);
 }
 
  .main{

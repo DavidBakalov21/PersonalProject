@@ -1,95 +1,128 @@
 class Cart {
   constructor() {
-      this.defaultOrderCounts = {
-        "Royal Cheese": { count: 0, price: 6.99 },
-        "Cheeseburger": { count: 0, price: 8.49 },
-        "Hamburger": { count: 0, price: 4.99 },
-        "McChicken": { count: 0, price: 4.49 },
-        "Double Royal Cheese": { count: 0, price: 9.99 },
-        "Chicken Roll": { count: 0, price: 5.79 },
-        "Medium fries": { count: 0, price: 5.19 },
-        "Large fries": { count: 0, price: 6.79 },
-        "Chicken McNuggets": { count: 0, price: 5.99 },
-        "Toast": { count: 0, price: 6.99 },
-        "Twister": { count: 0, price: 8.49 },
-        "Dips": { count: 0, price: 4.99 },
-        "Chefburger": { count: 0, price: 4.49 },
-        "Boxmaster": { count: 0, price: 9.99 },
-        "Bakcet": { count: 0, price: 5.79 },
-        "BBQ pizza": { count: 0, price: 6.99 },
-        "Extravaganzza": { count: 0, price: 8.49 },
-        "Greece pizza": { count: 0, price: 4.99 },
-        "Grill pizza": { count: 0, price: 4.49 },
-        "Karbonara": { count: 0, price: 9.99 },
-        "Marharyta": { count: 0, price: 5.79 }
-      };
-      this.orderCounts = JSON.parse(localStorage.getItem('orderCounts')) || this.defaultOrderCounts;
-      document.addEventListener('DOMContentLoaded', () => this.displayOrderCounts());
+    this.defaultOrderCounts = {
+      "Royal Cheese": { count: 0, price: 6.99 },
+      "Cheeseburger": { count: 0, price: 8.49 },
+      "Hamburger": { count: 0, price: 4.99 },
+      "McChicken": { count: 0, price: 4.49 },
+      "Double Royal Cheese": { count: 0, price: 9.99 },
+      "Chicken Roll": { count: 0, price: 5.79 },
+      "Medium fries": { count: 0, price: 5.19 },
+      "Large fries": { count: 0, price: 6.79 },
+      "Chicken McNuggets": { count: 0, price: 5.99 },
+      "Toast": { count: 0, price: 6.99 },
+      "Twister": { count: 0, price: 8.49 },
+      "Dips": { count: 0, price: 4.99 },
+      "Chefburger": { count: 0, price: 4.49 },
+      "Boxmaster": { count: 0, price: 9.99 },
+      "Bucket": { count: 0, price: 5.79 },
+      "BBQ pizza": { count: 0, price: 6.99 },
+      "Extravaganzza": { count: 0, price: 8.49 },
+      "Greece pizza": { count: 0, price: 4.99 },
+      "Grill pizza": { count: 0, price: 4.49 },
+      "Karbonara": { count: 0, price: 9.99 },
+      "Marharyta": { count: 0, price: 5.79 },
+    };
+    this.orderCounts =
+      JSON.parse(localStorage.getItem("orderCounts")) ||
+      this.defaultOrderCounts;
+    document.addEventListener("DOMContentLoaded", () =>
+      this.displayOrderCounts()
+    );
   }
   displayOrderCounts() {
-      let container = document.getElementById("orderedItems");
-      container.innerHTML = "";
+    let container = document.getElementById("orderedItems");
+    container.innerHTML = "";
 
-      let total = 0;
+    let total = 0;
 
-      Object.entries(this.orderCounts).forEach(([key, item]) => {
-          if (item.count > 0) {
-              const itemElem = document.createElement("div");
-              itemElem.classList.add("ordered-item");
+    Object.entries(this.orderCounts).forEach(([key, item]) => {
+      if (item.count > 0) {
+        const itemElem = document.createElement("div");
+        itemElem.classList.add("ordered-item");
 
-              const priceForAllItems = item.count * item.price;
-              total += priceForAllItems;
+        const priceForAllItems = item.count * item.price;
+        total += priceForAllItems;
 
-              itemElem.textContent = `Food: ${key}, Count: ${item.count}, Total Price: $${priceForAllItems.toFixed(2)}`;
-              itemElem.style="color: yellow;"
-              const deleteBtn = this.createDeleteButton(key);
-              itemElem.appendChild(deleteBtn);
-              container.appendChild(itemElem);
-          }
-      });
+        itemElem.textContent = `Food: ${key}, Count: ${
+          item.count
+        }, Total Price: $${priceForAllItems.toFixed(2)}`;
+        itemElem.style = "color: yellow;";
+        const deleteBtn = this.createDeleteButton(key);
+        itemElem.appendChild(deleteBtn);
+        container.appendChild(itemElem);
+      }
+    });
 
-      const totalElem = document.createElement("div");
-      totalElem.classList.add("total-amount");
-      totalElem.textContent = `Total: $${total.toFixed(2)}`;
-      container.appendChild(totalElem);
+    const totalElem = document.createElement("div");
+    totalElem.classList.add("total-amount");
+    totalElem.textContent = `Total: $${total.toFixed(2)}`;
+    container.appendChild(totalElem);
   }
 
   createDeleteButton(key) {
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "Delete";
-      deleteBtn.classList.add("btn", "btn-danger", "delete-button");
-      deleteBtn.style.marginLeft = "2%";
-      deleteBtn.addEventListener("click", () => {
-          this.orderCounts[key].count = 0;
-          localStorage.setItem('orderCounts', JSON.stringify(this.orderCounts));
-          this.displayOrderCounts();
-      });
-      return deleteBtn;
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.classList.add("btn", "btn-danger", "delete-button");
+    deleteBtn.style.marginLeft = "2%";
+    deleteBtn.addEventListener("click", () => {
+      this.orderCounts[key].count = 0;
+      localStorage.setItem("orderCounts", JSON.stringify(this.orderCounts));
+      this.displayOrderCounts();
+    });
+    return deleteBtn;
   }
 }
-window.onload = function() {
-         
-  const cards = document.querySelectorAll('.ordered-items-container');
+window.onload = function () {
+  const cards = document.querySelectorAll(".ordered-items-container");
   cards.forEach((card, index) => {
-          card.classList.add('animate-card');
+    card.classList.add("animate-card");
   });
-}
+};
 const cart = new Cart();
 
 function clearCart() {
-  document.getElementById('overlay').classList.remove('hidden');
+  document.getElementById("overlay").classList.remove("hidden");
+  document.getElementById("overlay").classList.add(".notHIdden");
+  return "success"
 }
 
 function closeOverlay() {
-  document.getElementById('overlay').classList.add('hidden');
+  document.getElementById("overlay").classList.add("hidden");
+  document.getElementById("overlay").classList.remove(".notHIdden");
+  return "success"
 }
 
 function deleteOrder() {
-  localStorage.removeItem('orderCounts');
+  localStorage.removeItem("orderCounts");
   cart.orderCounts = { ...cart.defaultOrderCounts };
   cart.displayOrderCounts();
+  return "success"
 }
 
 function confirm() {
-  document.getElementById('overlay').classList.remove('hidden');
+  document.getElementById("overlay").classList.remove("hidden");
+  document.getElementById("overlay").classList.add(".notHIdden");
+  return "success"
+}
+
+function JOke() {
+  fetch("https://v2.jokeapi.dev/joke/Programming")
+    .then((response) => response.json())
+    .then((data) =>
+      displayJoke(data.joke || `${data.setup} - ${data.delivery}`)
+    );
+    return "success"
+}
+
+function displayJoke(JOke) {
+  const jokeElement = document.getElementById("Joke");
+  const contentJoke = document.getElementById("contentJoke");
+
+  jokeElement.textContent = JOke;
+  contentJoke.classList.add("Joke-Animate");
+  setTimeout(() => {
+    contentJoke.classList.remove("Joke-Animate");
+  }, 6000);
+  return "success"
 }
